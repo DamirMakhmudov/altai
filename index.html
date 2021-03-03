@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet"
+    type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/quasar@2.0.0-beta.7/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+
+  <!-- Import Vue -->
+  <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
+  <!-- <script src="https://unpkg.com/vue@next"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script> -->
+
+  <title>Панель</title>
+</head>
+
+<!-- <script type='module' src="./two.js"></script> -->
+<!-- <script type='module'>import one from './two.js'</script> -->
+
+<body>
+  <div id="q-app">
+    <!-- <maincomponent :custom='custom'></maincomponent> -->
+    <p>{{person}}</p>
+    <p>{{second}}</p>
+    <input v-bind:value='person'></input>
+
+    <!-- <p>3 {{custom}}</p> -->
+    <!-- <expansion></expansion> -->
+    <button v-on:click="doSomething">doSomething</button>
+    <button v-on:click="doMore">doMore</button>
+    <button onclick="penis = 'new val'">other</button>
+    <ul>
+      <li v-for="(item, index) in dat">
+        {{ item.name }}
+      </li>
+    </ul>
+    <!-- <p>{{title}}</p> -->
+  </div>
+
+  <!-- Import Quasar -->
+  <script src="https://cdn.jsdelivr.net/npm/quasar@2.0.0-beta.7/dist/quasar.umd.prod.js"></script>
+   
+  <script>
+    var datastore = [{name: 'damir'},{name:'kolya'},{name:'vasya'}];
+    var penis = 'Michel';
+    var tits = 'Vera';
+
+    const { createApp, ref, computed, watch } = Vue;
+    const { useQuasar } = Quasar;
+
+    const app = Vue.createApp({
+      // props:{
+      //   person:{
+      //     type: String,
+      //     required: true
+      //   }
+      // },
+      setup(props, context) {
+        // const person = ref(penis);
+        const second = ref(tits);
+        // const dat = ref(datastore);
+        const dat = datastore;
+
+        const person = penis;
+        // var second = tits;
+        // const dat = datastore;
+
+        const $q = useQuasar();
+
+        function doSomething() {
+          $q.notify(person)
+        }
+        
+        function doMore() {
+          penis = 'tra-ba-ba';
+          datastore.push({name: 'petya'});
+          // person.value = 'New Value';
+          second.value = 'Hello second';
+          console.log(person.value);
+        }
+
+        return {
+          dat,
+          person,
+          second,
+          doSomething,
+          doMore,
+          version: Quasar.version,
+          custom: 'First',
+          name: 'Damir',
+          email: 'samrukov@gmail.com'
+        }
+      }
+    })
+
+    app.use(Quasar, {
+      config: {
+        notify: { /* look at QuasarConfOptions from the API card */ }
+      }
+    })
+    Quasar.lang.set(Quasar.lang.ru)
+    // app.mount('#q-app')
+    </script>
+
+    <!-- Import components -->
+    <!-- <script type='module' src="./two.js"></script> -->
+    <!-- <script type='text/x-template' src="./two.js"></script> -->
+    <!-- <script src="./two.js"></script> -->
+    <script src="./maincomponent.js"></script>
+    <script src="./expansion.js"></script>
+
+    <!-- Mount App -->
+    <script>const mountedapp = app.mount('#q-app')</script>
+    
+  </body>
+</html>
